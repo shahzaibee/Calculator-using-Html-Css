@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 10px;
+            border-collapse: collapse;
+        }
+
+        td {
+            text-align: center;
+            padding: 5px;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-equal {
+            background-color: #fda30e;
+            color: #fff;
+        }
+
+        .btn-clear {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        .btn-operand {
+            background-color: #e0e0e0;
+            color: #000;
+        }
+
+        .btn-operator {
+            background-color: #4caf50;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculator</h1>
+        <input type="text" id="result" readonly>
+        <table>
+            <tr>
+                <td><input type="button" value="7" onclick="appendValue('7')" class="btn-operand"></td>
+                <td><input type="button" value="8" onclick="appendValue('8')" class="btn-operand"></td>
+                <td><input type="button" value="9" onclick="appendValue('9')" class="btn-operand"></td>
+                <td><input type="button" value="/" onclick="appendValue('/')" class="btn-operator"></td>
+                <td><input type="button" value="sqrt" onclick="calculate('sqrt')" class="btn-operator"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="4" onclick="appendValue('4')" class="btn-operand"></td>
+                <td><input type="button" value="5" onclick="appendValue('5')" class="btn-operand"></td>
+                <td><input type="button" value="6" onclick="appendValue('6')" class="btn-operand"></td>
+                <td><input type="button" value="-" onclick="appendValue('-')" class="btn-operator"></td>
+                <td><input type="button" value="^" onclick="appendValue('^')" class="btn-operator"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="1" onclick="appendValue('1')" class="btn-operand"></td>
+                <td><input type="button" value="2" onclick="appendValue('2')" class="btn-operand"></td>
+                <td><input type="button" value="3" onclick="appendValue('3')" class="btn-operand"></td>
+                <td><input type="button" value="+" onclick="appendValue('+')" class="btn-operator"></td>
+                <td><input type="button" value="%" onclick="appendValue('%')" class="btn-operator"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="0" onclick="appendValue('0')" class="btn-operand"></td>
+                <td><input type="button" value="." onclick="appendValue('.')" class="btn-operand"></td>
+                <td><input type="button" value="=" class="btn-equal" onclick="calculate()"></td>
+                <td><input type="button" value="*" onclick="appendValue('*')" class="btn-operator"></td>
+                <td><input type="button" value="C" class="btn-clear" onclick="clearInput()"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function appendValue(value) {
+            document.getElementById('result').value += value;
+        }
+
+        function calculate(operation) {
+            const input = document.getElementById('result').value;
+            let result;
+
+            if (operation === 'sqrt') {
+                result = Math.sqrt(parseFloat(input));
+            } else {
+                try {
+                    result = eval(input);
+                } catch (error) {
+                    result = 'Invalid input';
+                }
+            }
+
+            document.getElementById('result').value = result;
+        }
+
+        function clearInput() {
+            document.getElementById('result').value = '';
+        }
+    </script>
+</body>
+</html>
